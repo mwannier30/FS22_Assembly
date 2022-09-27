@@ -13,12 +13,14 @@
 
 module load UHTS/Assembler/canu/2.1.1;
 
+
 INPUTDIR = /data/users/mwannier/FS22_Assembly/participant_2/pacbio/*
 OUTDIR = /data/users/mwannier/FS22_Assembly/assembly/canu
 
-canu \
- -p asm -d ecoliTrio \
- genomeSize=5m \
- -haplotypeK12 K12.parental.fasta \
- -haplotypeO157 O157.parental.fasta \
- -pacbio F1.fasta
+
+ canu -p canu_assembly \
+ -d $OUTDIR \
+ genomeSize=130m \
+ -pacbio-raw $INPUTDIR \
+ gridEngineResourceOption="--cpus-per-task=THREADS --mem-per-cpu=MEMORY" \
+ gridOptions="--partition=pall --mail-user=maelle.wannier@students.unibe.ch"
