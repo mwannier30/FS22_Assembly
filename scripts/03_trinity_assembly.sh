@@ -7,16 +7,17 @@
 #SBATCH --job-name=trinity_assembly
 #SBATCH --mail-user=maelle.wannier@students.unibe.ch
 #SBATCH --mail-type=begin,end
-#SBATCH --output=/data/users/mwannier/output_fastqc_%j.o
-#SBATCH --error=/data/users/mwannier/error_fastqc_%j.e
+#SBATCH --output=/data/users/mwannier/output_%j.o
+#SBATCH --error=/data/users/mwannier/error_%j.e
 #SBATCH --partition=pcourseassembly
 
 module load UHTS/Assembler/trinityrnaseq/2.5.1;
 
-INPUTDIR = /data/users/mwannier/participant_2/RNAseq
-OUTDIR = /data/users/mwannier/assembly/trinity/
+INPUTDIR=/data/users/mwannier/FS22_Assembly/participant_2/RNAseq
+OUTDIR=/data/users/mwannier/FS22_Assembly/assembly/trinity/
 
 Trinity --seqType fq \
-    --left $INPUTDIR/SRR1584462_1.fastq.gz \
-    --right $INPUTDIR/SRR1584462_2.fastq.gz \
-    --output $OUTDIR
+	--left $INPUTDIR/SRR1584462_1.fastq.gz \
+	--right $INPUTDIR/SRR1584462_2.fastq.gz \
+	--CPU 6 --max_memory 20G \
+	--output $OUTDIR
