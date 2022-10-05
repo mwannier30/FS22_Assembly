@@ -20,4 +20,6 @@ OUTDIR=/data/users/mwannier/FS22_Assembly/assembly/flye/
 flye \
 	--pacbio-raw $PACBIO \
 	--genome-size 130m \
+	--threads 16 \
+	--resume \
 	--out-dir $OUTDIR
