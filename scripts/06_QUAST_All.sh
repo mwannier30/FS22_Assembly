@@ -23,5 +23,5 @@ PROJDIR=/data/users/mwannier/FS22_Assembly
 singularity exec \
 --bind $PROJDIR \
 /data/courses/assembly-annotation-course/containers/quast_5.1.0rc1.sif \
-quast.py $DATA_polished_canu $DATA_polished_flye $DATA_canu $DATA_flye \
---eukaryote --est-ref-size 130000000 --labels canu_p,flye_p,canu,flye --large --threads 4 -o $OUTDIR
+quast.py $DATA_polished_canu $DATA_polished_flye \
+--eukaryote --est-ref-size 130000000 --labels canu,flye --large --threads 4 -o $OUTDIR

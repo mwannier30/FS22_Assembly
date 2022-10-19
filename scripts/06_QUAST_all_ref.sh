@@ -18,11 +18,17 @@ DATA_polished_flye=/data/users/mwannier/FS22_Assembly/polishing/flye/pilon_flye/
 DATA_canu=/data/users/mwannier/FS22_Assembly/assembly/canu/canu_assembly.contigs.fasta
 DATA_flye=/data/users/mwannier/FS22_Assembly/assembly/flye/assembly.fasta
 
+PROJDIR=/data/users/mwannier/FS22_Assembly
+
+REFDIR=/data/courses/assembly-annotation-course/references
 REF=/data/courses/assembly-annotation-course/references/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa
 GFF=/data/courses/assembly-annotation-course/references/*.gff
 
 OUTDIR=/data/users/mwannier/FS22_Assembly/evaluation/quast/all_ref
 
 
-quast.py $DATA_polished_canu $DATA_polished_flye $DATA_canu $DATA_flye -R $REF --eukaryote \
---labels canu_p,flye_p,canu,flye --threads 4 -G $GFF -o $OUTDIR
+singularity exec \
+--bind $PROJDIR,$REFDIR \
+/data/courses/assembly-annotation-course/containers/quast_5.1.0rc1.sif \
+quast.py $DATA_polished_canu $DATA_polished_flye \
+-r $REF -g $GFF --eukaryote --labels canu,flye --large --threads 4 -o $OUTDIR
