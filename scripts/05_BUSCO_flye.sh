@@ -11,12 +11,19 @@
 #SBATCH --output=/data/users/mwannier/output_busco_flye_%j.o
 #SBATCH --error=/data/users/mwannier/error_busco_flye_%j.e
 
+PROJDIR=/data/users/mwannier/FS22_Assembly
 INPUTDIR=/data/users/mwannier/FS22_Assembly/polishing/flye/pilon_flye/pilon.fasta
+UNPOLISHED=/data/users/mwannier/FS22_Assembly/assembly/flye/assembly.fasta
 WORKDIR=/data/users/mwannier/FS22_Assembly/evaluation/busco
 
 cd $WORKDIR
 
 singularity exec \
---bind $INPUTDIR \
+--bind $PROJDIR \
 /data/courses/assembly-annotation-course/containers2/busco_v5.1.2_cv1.sif \
-busco -i $INPUTDIR -m genome --lineage brassicales_odb10 --cpu 4 -o flye_busco
+busco -i $INPUTDIR -m genome --lineage brassicales_odb10 --cpu 4 -o flye
+
+singularity exec \
+--bind $PROJDIR \
+/data/courses/assembly-annotation-course/containers2/busco_v5.1.2_cv1.sif \
+busco -i $UNPOLISHED -m genome --lineage brassicales_odb10 --cpu 4 -o flye_unpolished

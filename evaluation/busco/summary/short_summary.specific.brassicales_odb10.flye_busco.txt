@@ -1,0 +1,19 @@
+# BUSCO version is: 5.1.2 
+# The lineage dataset is: brassicales_odb10 (Creation date: 2020-08-05, number of genomes: 10, number of BUSCOs: 4596)
+# Summarized benchmarking in BUSCO notation for file /data/users/mwannier/FS22_Assembly/polishing/flye/pilon_flye/pilon.fasta
+# BUSCO was run in mode: genome
+# Gene predictor used: metaeuk
+
+	***** Results: *****
+
+	C:99.2%[S:97.7%,D:1.5%],F:0.1%,M:0.7%,n:4596	   
+	4559	Complete BUSCOs (C)			   
+	4488	Complete and single-copy BUSCOs (S)	   
+	71	Complete and duplicated BUSCOs (D)	   
+	3	Fragmented BUSCOs (F)			   
+	34	Missing BUSCOs (M)			   
+	4596	Total BUSCO groups searched		   
+
+Dependencies and versions:
+	hmmsearch: 3.2
+	metaeuk: 1e75c9d468f5aace3f8e952e09170d5e9cbf01d7-MPI

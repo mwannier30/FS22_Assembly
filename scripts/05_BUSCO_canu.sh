@@ -11,12 +11,19 @@
 #SBATCH --output=/data/users/mwannier/output_busco_canu_%j.o
 #SBATCH --error=/data/users/mwannier/error_busco_canu_%j.e
 
+PROJDIR=/data/users/mwannier/FS22_Assembly
 INPUTDIR=/data/users/mwannier/FS22_Assembly/polishing/canu/pilon_canon/pilon.fasta
+UNPOLISHED=/data/users/mwannier/FS22_Assembly/assembly/canu/canu_assembly.contigs.fasta
 WORKDIR=/data/users/mwannier/FS22_Assembly/evaluation/busco
 
 cd $WORKDIR
 
 singularity exec \
---bind $INPUTDIR \
+--bind $PROJDIR \
 /data/courses/assembly-annotation-course/containers2/busco_v5.1.2_cv1.sif \
-busco -i $INPUTDIR -m genome --lineage brassicales_odb10 --cpu 4 -o canu_busco
+busco -i $INPUTDIR -m genome --lineage brassicales_odb10 --cpu 4 -o canu
+
+singularity exec \
+--bind $PROJDIR \
+/data/courses/assembly-annotation-course/containers2/busco_v5.1.2_cv1.sif \
+busco -i $UNPOLISHED -m genome --lineage brassicales_odb10 --cpu 4 -o canu_unpolished
