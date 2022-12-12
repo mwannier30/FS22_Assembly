@@ -10,11 +10,23 @@
 #SBATCH --error=/data/users/mwannier/error_fastqc_%j.e
 #SBATCH --partition=pcourseassembly
 
+
+#import modules
 module load UHTS/Quality_control/fastqc/0.11.9;
 
+#Create variables
+OUTDIR=/data/users/mwannier/assembly_annotation_course/read_QC/fastqc
+
+#change working directory to directory containing fastq files
 cd ../participant_2
 
+#loop over fastq files and do a fastqc analysis
 for file in $(ls ./*/*); do
-	fastqc -o /data/users/mwannier/assembly_annotation_course/read_QC -f fastq $file
+	fastqc -o $OUTDIR -f fastq $file
 done
 
+#change working directory to the output directory
+cd $OUTDIR 
+
+#do a multiqc analysis
+multiqc -o ../multiqc ./

@@ -10,13 +10,16 @@
 #SBATCH --error=/data/users/mwannier/error_kmer_%j.e
 #SBATCH --partition=pcourseassembly
 
+#import modules
 module load UHTS/Analysis/jellyfish/2.3.0;
 
+#k-mer counting
 jellyfish count \
 -C -m 19 -s 2G -t 4 -o /data/users/mwannier/assembly_annotation_course/read_QC/kmer_counting/Illumina.jf \
 <(zcat /data/users/mwannier/assembly_annotation_course/participant_2/Illumina/ERR3624577_1.fastq.gz) \
 <(zcat /data/users/mwannier/assembly_annotation_course/participant_2/Illumina/ERR3624577_2.fastq.gz) 
 
+#creating k-mer histogram
 jellyfish histo \
 -t 4 /data/users/mwannier/assembly_annotation_course/read_QC/kmer_counting/Illumina.jf \
 > /data/users/mwannier/assembly_annotation_course/read_QC/kmer_counting/Illumina.histo
